@@ -2,7 +2,7 @@
 #include"Exhibit.h"
 #include"ArtObjects.h"
 
-class Picture : public Exhibit, public ArtObjects
+class Picture :  public ArtObjects
 {
 private:
 	char* author;
@@ -12,7 +12,7 @@ public:
 		author = nullptr;
 
 	}
-	Picture(const char arr[], const char arr1[], const char arr2[], int Year) :Exhibit(arr) , ArtObjects(arr1,Year) {
+	Picture(const char arr[], const char arr1[], const char arr2[], int Year) : ArtObjects(arr, arr1,Year) {
 	/*	char* tmp1 = new char[strlen(arr1) + 1] {};
 		for (int i = 0; i < strlen(arr1); i++) {
 			tmp1[i] = arr1[i];
@@ -28,7 +28,7 @@ public:
 		//year = Year;
 	}
 
-	Picture(Picture& s) :Exhibit(s), ArtObjects(s) {
+	Picture(Picture& s) : ArtObjects(s) {
 		/*subject = s.subject;*/
 		author = s.author;
 		/*year = s.year;*/
@@ -43,7 +43,7 @@ public:
 		return*this;
 	}
 
-	Picture(Picture&& s) :Exhibit(move(s)), ArtObjects(move(s)){
+	Picture(Picture&& s) : ArtObjects(move(s)){
 		/*subject = s.subject;*/
 		author = s.author;
 		/*year = s.year;*/
@@ -55,7 +55,7 @@ public:
 	}
 
 	Picture& operator=(Picture&& s) {
-		Exhibit::operator=(move(s));
+		
 		ArtObjects::operator=(move(s));
 		/*subject = s.subject;*/
 		author = s.author;
@@ -71,10 +71,9 @@ public:
 			cout << "Empty!" << endl;
 			return;
 		}
-	
-		cout << "Name:" << setw(3) << name << endl;
-		cout << "Author:" << setw(3) << author << endl;
 		ArtObjects::print();
+		cout << "Author:" << setw(3) << author << endl;
+		
 	}
 	friend ostream& operator <<(ostream& fout, const Picture& s) {
 		s.print();

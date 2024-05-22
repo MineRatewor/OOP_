@@ -9,16 +9,23 @@ private:
 public:
 	Coin() :Exhibit() {}
 	Coin(const char arr[], double dom, int st, int en) :Exhibit(arr) {
+		
 		domination = dom;
 		startYear = st;
 		endYear = en;
 	}
 	Coin(Coin& s) :Exhibit(s) {
+		if (name == s.name and domination == s.domination and startYear == s.startYear and endYear == s.endYear) {
+			return;
+		}
 		domination = s.domination;
 		startYear = s.startYear;
 		endYear = s.endYear;
 	}
 	Coin& operator=(Coin& s) {
+		if (name == s.name and domination == s.domination and startYear == s.startYear and endYear == s.endYear) {
+			return *this;
+		}
 		Exhibit::operator=(s);
 		domination = s.domination;
 		startYear = s.startYear;
@@ -27,6 +34,12 @@ public:
 	}
 
 	Coin(Coin&& s) :Exhibit(move(s)) {
+		if (name == s.name and domination == s.domination and startYear == s.startYear and endYear == s.endYear) {
+			s.domination = 0;
+			s.startYear = 0;
+			s.endYear = 0;
+			return;
+		}
 		domination = s.domination;
 		startYear = s.startYear;
 		endYear = s.endYear;
@@ -37,6 +50,12 @@ public:
 		s.endYear = 0;
 	}
 	Coin& operator=(Coin&& s) {
+		if (name == s.name and domination == s.domination and startYear == s.startYear and endYear == s.endYear) {
+			s.domination = 0;
+			s.startYear = 0;
+			s.endYear = 0;
+			return *this;
+		}
 		Exhibit::operator=(move(s));
 		domination = s.domination;
 		startYear = s.startYear;

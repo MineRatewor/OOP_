@@ -1,26 +1,25 @@
 #pragma once
 #include"Exhibit.h"
 #include"ArtObjects.h"
-class Photo :public Exhibit, public ArtObjects {
+class Photo : public ArtObjects {
 public:
-	Photo() :Exhibit() , ArtObjects() {}
-	Photo(const char arr[], const char arr1[], int Year) :Exhibit(arr) , ArtObjects(arr1,Year){
+	Photo() :  ArtObjects() {}
+	Photo(const char arr[], const char arr1[], int Year) : ArtObjects(arr, arr1,Year){
 	}
 
-	Photo(Photo& s) :Exhibit(s), ArtObjects(s) {
+	Photo(Photo& s) :ArtObjects(s) {
 	}
 
 	Photo& operator=(Photo& s) {
-		Exhibit::operator=(s);
+		
 		ArtObjects::operator=(s);
 		return*this;
 	}
 
-	Photo(Photo&& s) :Exhibit(move(s)) , ArtObjects(move(s)) {
+	Photo(Photo&& s) : ArtObjects(move(s)) {
 	}
 
 	Photo& operator=(Photo&& s) {
-		Exhibit::operator=(move(s));
 		ArtObjects::operator=(move(s));
 
 		return*this;
@@ -30,7 +29,6 @@ public:
 			cout << "Empty!" << endl;
 			return;
 		}
-		cout << "Name:" << setw(3) << name << endl;
 		ArtObjects::print();
 	}
 	friend ostream& operator <<(ostream& fout, const Photo& s) {

@@ -34,6 +34,6 @@ int main() {
 	l.push_back(f);
 	l.push_back(g);
 	
-	l.print();
-
+	l1.print();
+	
 }
