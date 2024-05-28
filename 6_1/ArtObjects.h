@@ -13,8 +13,9 @@ public:
 	}
 
 	ArtObjects(const char arr1[], const char arr[], int Y) : Exhibit(arr1) {
-		char* tmp = new char[strlen(arr) + 1] {};
-		for (int i = 0; i < strlen(arr); i++) {
+		int s = strlen(arr);
+		char* tmp = new char[s+ 1] {};
+		for (int i = 0; i < s; i++) {
 			tmp[i] = arr[i];
 		}
 		Objects = tmp;
@@ -22,8 +23,9 @@ public:
 	}
 
 	ArtObjects(ArtObjects& s) : Exhibit(s){
-		char* temp = new char[strlen(s.Objects) + 1] {};
-		for (int i = 0; i < strlen(s.Objects); i++) {
+		int s1 = strlen(s.Objects);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.Objects[i];
 		}
 		delete[] Objects;
@@ -32,8 +34,9 @@ public:
 	}
 	virtual ArtObjects& operator=(ArtObjects& s) {
 		Exhibit::operator=(s);
-		char* temp = new char[strlen(s.Objects) + 1] {};
-		for (int i = 0; i < strlen(s.Objects); i++) {
+		int s1 = strlen(s.Objects);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.Objects[i];
 		}
 		delete[] Objects;
@@ -43,8 +46,9 @@ public:
 		return *this;
 	}
 	ArtObjects(ArtObjects&& s): Exhibit(move(s)) {
-		char* temp = new char[strlen(s.Objects) + 1] {};
-		for (int i = 0; i < strlen(s.Objects); i++) {
+		int s1 = strlen(s.Objects);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.Objects[i];
 		}
 		delete[] Objects;
@@ -52,10 +56,14 @@ public:
 		year = s.year;
 		s.Objects = nullptr;
 	}
+	virtual ArtObjects* clone() {
+		return new ArtObjects(*this);
+	}
 	virtual ArtObjects& operator=(ArtObjects&& s) {
 		Exhibit::operator=(move(s));
-		char* temp = new char[strlen(s.Objects) + 1] {};
-		for (int i = 0; i < strlen(s.Objects); i++) {
+		int s1 = strlen(s.Objects);
+		char* temp = new char[ s1+ 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.Objects[i];
 		}
 		delete[] Objects;
@@ -66,6 +74,38 @@ public:
 
 		return *this;
 	}
+	virtual char* getName() {
+		return name;
+	}
+	virtual char* getObjetcs() {
+		return Objects;
+	}
+	virtual int getYear() {
+		return year;
+	}
+	virtual void clear() {
+		Exhibit::clear();
+		Objects = nullptr;
+		year = 0;
+	}
+	virtual void setName(const char arr[]) {
+		Exhibit::setName(arr);
+	}
+
+	virtual void setObjects(const char arr1[]) {
+		int s = strlen(arr1);
+		char* temp = new char[s + 1] {};
+		for (int i = 0; i < s; i++) {
+			temp[i] = arr1[i];
+		}
+		delete[] Objects;
+		Objects = temp;
+	}
+
+	virtual void setYear(int y) {
+		year = y;
+	}
+	
 
 	virtual void print()  const {
 		if (Objects == nullptr) {
@@ -85,8 +125,9 @@ public:
 		cout << "Year:" << setw(3) << year << endl;
 	}
 
-	friend ostream& operator <<(ostream& fout, const ArtObjects& s) {
-		s.print();
+	 friend ostream& operator<<(ostream& fout, const ArtObjects& s)
+	{
+		 s.print();
 		return fout;
 	}
 

@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<iomanip>
+
 using namespace std;
 
 template<typename T>
@@ -89,6 +90,7 @@ void List<T>::push_back(T data)
 }
 
 
+
 template<typename T>
 void List<T>::insert(T data, int index)
 {
@@ -129,7 +131,7 @@ void List<T>::pop_front()
 	Node<T>* tmp = head;
 
 	head = head->pNext;
-	delete tmp;
+	delete[] tmp;
 	size--;
 }
 

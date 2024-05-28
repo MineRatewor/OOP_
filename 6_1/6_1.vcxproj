@@ -128,16 +128,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="6-1.cpp" />
+    <ClCompile Include="Massiv.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="ColdWeapon.h" />
     <ClInclude Include="Exhibit.h" />
     <ClInclude Include="Figurines.h" />
     <ClInclude Include="ArtObjects.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListArray.h" />
+    <ClInclude Include="massiv.h" />
     <ClInclude Include="Photo.h" />
     <ClInclude Include="Picture.h" />
     <ClInclude Include="Vector.h" />

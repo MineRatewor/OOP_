@@ -62,6 +62,34 @@ public:
 
 		return *this;
 	}
+	ColdWeapon* clone() {
+		return new ColdWeapon(*this);
+	}
+	char* getName() {
+		return name;
+	}
+	int getStartYear() {
+		return startYear;
+	}
+	int getEndYear() {
+		return endYear;
+	}
+	void setName(const char arr[]) {
+		Exhibit::setName(arr);
+	}
+	void setStartYear(int st) {
+		startYear = st;
+	}
+	void setEndYear(int en) {
+		endYear = en;
+	}
+	
+	void clear() {
+		Exhibit::clear();
+		startYear = 0;
+		endYear = 0;
+	}
+
 	void print() const override {
 		if (name == nullptr) {
 			cout << "Empty!" << endl;
@@ -72,7 +100,13 @@ public:
 		cout << "EndYear:" << setw(5) << endYear << endl;
 	}
 	friend ostream& operator <<(ostream& fout, const ColdWeapon& s) {
-		s.print();
+		if (s.name == nullptr) {
+			cout << "Empty!" << endl;
+			return fout;
+		}
+		fout << "Name:" << setw(3) << s.name << endl;
+		fout << "StartYear:" << setw(3) << s.startYear << endl;
+		fout << "EndYear:" << setw(3) << s.endYear << endl;
 		return fout;
 	}
 };

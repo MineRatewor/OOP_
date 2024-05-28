@@ -24,6 +24,30 @@ public:
 
 		return*this;
 	}
+	Photo* clone() {
+		return new Photo(*this);
+	}
+	char* getName() {
+		return name;
+	}
+	char* getObjects() {
+		return Objects;
+	}
+	int getYear() {
+		return year;
+	}
+	void setName(const char arr[]) {
+		ArtObjects::setName(arr);
+	}
+	void setObjects(const char arr[]) {
+		ArtObjects::setObjects(arr);
+	}
+	void setYear(int y) {
+		ArtObjects::setYear(y);
+	}
+	void clear() {
+		ArtObjects::clear();
+	}
 	void print() const override {
 		if (name == nullptr) {
 			cout << "Empty!" << endl;
@@ -31,11 +55,18 @@ public:
 		}
 		ArtObjects::print();
 	}
+	
 	friend ostream& operator <<(ostream& fout, const Photo& s) {
-		s.print();
+		if (s.name == nullptr) {
+			cout << "Empty!" << endl;
+			return fout;
+		}
+		fout << "Name:" << setw(3) << s.name << endl;
+		fout << "Objects" << setw(3) << s.Objects << endl;
+		fout << "Year:" << setw(3) << s.year << endl;
+		
 		return fout;
 	}
-	~Photo() {
-		
+	~Photo() {	
 	}
 };

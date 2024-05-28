@@ -18,9 +18,9 @@ public:
 			tmp1[i] = arr1[i];
 		}
 		subject = tmp1;*/
-		
-		char* tmp2 = new char[strlen(arr2) + 1] {};
-		for (int i = 0; i < strlen(arr2); i++) {
+		int s = strlen(arr2);
+		char* tmp2 = new char[s + 1] {};
+		for (int i = 0; i < s; i++) {
 			tmp2[i] = arr2[i];
 		}
 		author = tmp2;
@@ -66,6 +66,45 @@ public:
 		/*s.subject = nullptr;*/
 		return *this;
 	}
+	Picture* clone() {
+		return new Picture(*this);
+	}
+	void clear() {
+		ArtObjects::clear();
+		author = nullptr;
+	}
+	char* getName() {
+		return name;
+	}
+	void setName(const char arr[]) {
+		ArtObjects::setName(arr);
+	}
+	char* getObjects() {
+		return Objects;
+	}
+	void setObjects(const char arr[]) {
+		ArtObjects::setObjects(arr);
+	}
+	int getYear() {
+		return year;
+	}
+	void setYear(int y) {
+		ArtObjects::setYear(y);
+	}
+	char* getAuthor() {
+		return author;
+	}
+	void setAuthor(const char arr2[]) {
+		int s = strlen(arr2);
+		char* temp = new char[s + 1] {};
+
+		for (int i = 0; i < s; i++) {
+			temp[i] = arr2[i];
+		}
+		delete[] author;
+		author = temp;
+	}
+	
 	void print() const override {
 		if (name == nullptr) {
 			cout << "Empty!" << endl;
@@ -75,8 +114,16 @@ public:
 		cout << "Author:" << setw(3) << author << endl;
 		
 	}
-	friend ostream& operator <<(ostream& fout, const Picture& s) {
-		s.print();
+	friend ostream& operator <<(ostream& fout, const Picture& s){
+		if (s.name == nullptr) {
+			cout << "Empty!" << endl;
+			return fout;
+		}
+		fout << "Name:" << setw(3) << s.name << endl;
+		fout << "Objects:" << setw(3) << s.Objects << endl;
+		fout << "Year:" << setw(3) << s.year << endl;
+		fout << "Author:" << setw(3) << s.author << endl;
+		
 		return fout;
 	}
 	~Picture()  {

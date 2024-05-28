@@ -67,7 +67,44 @@ public:
 		s.endYear = 0;
 		return *this;
 	}
-
+	Coin* clone() {
+		return new Coin(*this);
+	}
+	char* getName() {
+		return name;
+	}
+	double getDomination() {
+		return domination;
+	}
+	int getStartYear() {
+		return startYear;
+	}
+	int getEndYear() {
+		return endYear;
+	}
+	void setName(const char arr[]) {
+		Exhibit::setName(arr);
+	}
+	void setDomination(double dom) {
+		domination = dom;
+	}
+	void setStartYear(int st) {
+		startYear = st;
+	}
+	void setEndYear(int en) {
+		endYear = en;
+	}
+	void clear() {
+		Exhibit::clear();
+		domination = 0;
+		startYear = 0;
+		endYear = 0;
+	}
+	Coin& clone(Coin& s) {
+		Coin st(s);
+		return st;
+		
+	}
 	void print() const override {
 		if (name == nullptr) {
 			cout << "Empty!" << endl;
@@ -79,7 +116,14 @@ public:
 		cout << "EndYear:" << setw(5) << endYear << endl;
 	}
 	friend ostream& operator <<(ostream& fout, const Coin& s) {
-		s.print();
+		if (s.name == nullptr) {
+			cout << "Empty!" << endl;
+			return fout;
+		}
+		fout << "Name:" << setw(3) << s.name << endl;
+		fout << "Domination:" << setw(3) << s.domination << endl;
+		fout << "StartYear:" << setw(3) << s.startYear << endl;
+		fout << "EndYear:" << setw(3) << s.endYear << endl;
 		return fout;
 	}
 

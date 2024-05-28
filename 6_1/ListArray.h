@@ -8,10 +8,12 @@
 #include"List.h"
 
 
+
 class ListArray {
 private:
 	List<Exhibit*> l;
 public:
+	
 	ListArray() {}
 	ListArray(ListArray& s) {
 		l = s.l;
@@ -29,45 +31,31 @@ public:
 		s.clear();
 		return *this;
 	}
-	void push_back(Coin& st) {
-		Coin* st1 = new Coin(st);
-		l.push_back(st1);
-	}
-
-	void push_back(ColdWeapon& st) {
-		ColdWeapon* st1 = new ColdWeapon(st);
-		l.push_back(st1);
-	}
-
-	void push_back(Figurines& st) {
-		Figurines* st1 = new Figurines(st);
-		l.push_back(st1);
-	}
 	
+	template<typename T>
+	void push_back(T* st) {
+		l.push_back(st);
+	}
 	
 	int size() {
 		return l.GetSize();
 	}
-	void push_back(Picture& st) {
-		Picture* st1 = new Picture(st);
-		l.push_back(st1);
-	}
-
-	void push_back(Photo& st) {
-		Photo* st1 = new Photo(st);
-		l.push_back(st1);
-	}
-
-	void pop_back() {
-		l.pop_back();
-	}
+	
 	
 	void clear() {
+		for (int i = 0; i < l.GetSize(); i++) {
+			l[i]->clear();
+		}
 		l.clear();
 	}
-	
-	
+	void clone(ListArray& s) {
+		for (int i = 0; i < s.size(); i++) {
+			l.push_back(s.l[i]->clone());
+		}
+	}
+
 	void pop(int index) {
+		l[index]->clear();
 		l.removeAt(index);
 	}
 	void print() {
@@ -77,6 +65,7 @@ public:
 		}
 		for (unsigned int i = 0; i < l.GetSize(); i++)
 			cout << *l[i] << endl;
+		
 	}
 
 	

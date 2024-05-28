@@ -11,15 +11,17 @@ public:
 		name = nullptr;
 	}
 	Exhibit(const char arr[]) {
-		char* tmp = new char[strlen(arr) + 1] {};
-		for (int i = 0; i < strlen(arr); i++) {
+		int s = strlen(arr);
+		char* tmp = new char[s + 1] {};
+		for (int i = 0; i < s; i++) {
 			tmp[i] = arr[i];
 		}
 		name = tmp;
 	}
 	Exhibit(Exhibit& s) {
-		char* temp = new char[strlen(s.name) + 1] {};
-		for (int i = 0; i < strlen(s.name); i++) {
+		int s1 = strlen(s.name);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.name[i];
 		}
 		delete[] name;
@@ -28,8 +30,9 @@ public:
 	}
 
 	virtual Exhibit& operator=(Exhibit& s) {
-		char* temp = new char[strlen(s.name) + 1] {};
-		for (int i = 0; i < strlen(s.name); i++) {
+		int s1 = strlen(s.name);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.name[i];
 		}
 		delete[] name;
@@ -38,14 +41,18 @@ public:
 		return *this;
 	}
 
+	virtual Exhibit* clone()  {
+		return new Exhibit(*this);
+	}
 	Exhibit(Exhibit&& s) {
 		name = s.name;
 		s.name = nullptr;
 	}
 
 	virtual Exhibit& operator=(Exhibit&& s) {
-		char* temp = new char[strlen(s.name) + 1] {};
-		for (int i = 0; i < strlen(s.name); i++) {
+		int s1 = strlen(s.name);
+		char* temp = new char[s1 + 1] {};
+		for (int i = 0; i < s1; i++) {
 			temp[i] = s.name[i];
 		}
 		delete[] name;
@@ -53,6 +60,23 @@ public:
 
 		s.name = nullptr;
 		return *this;
+	}
+	virtual char* getName()  {
+		return name;
+	}
+	
+
+	virtual void setName(const char arr[]) {
+		int s = strlen(arr);
+		char* temp = new char[s + 1] {};
+		for (int i = 0; i < s; i++) {
+			temp[i] = arr[i];
+		}
+		delete[] name;
+		name = temp;
+	}
+	virtual void clear() {
+		name = nullptr;
 	}
 
 	virtual void print() const {
@@ -65,13 +89,13 @@ public:
 			cout << name[i];
 		}
 	}
-	friend ostream& operator <<(ostream& fout, const Exhibit& s) {
+	friend ostream& operator<<(ostream& fout, const Exhibit& s){
 		s.print();
 		return fout;
 	}
 
 	virtual ~Exhibit() {
-		delete[] name;
+		delete name;
 	}
 
 };
